@@ -1,4 +1,4 @@
-[{"name": ["Kousaka Honoka", "Honoka Kousaka", "Honoka", "高坂穂 乃果", "乃果 高坂穂", "乃果"], "voice actress": ["Nitta Emi", "新田恵海"], 
+[{"flag": "idol", "name": ["Kousaka Honoka", "Honoka Kousaka", "Honoka", "高坂穂 乃果", "乃果 高坂穂", "乃果"], "voice actress": ["Nitta Emi", "新田 恵海"], 
 "color": "Orange", "centersJP": ["僕らのLIVE 君とのLIFE", "Snow halation", "もぎゅっと""love""で接近中!", "僕らは今のなかで", "きっと青春が聞こえる"
                                 "ススメ→トゥモロウ", "No brand girls", "START:DASH‼", "タカラモノズ", "Paradise Live", "それは僕たちの奇跡",
                                 "どんなときもずっと", "ユメノトビラ", "SENTIMENTAL StepS", "KiRa-KiRa Sensation!", "Happy maker!", "Shangri-La Shower",
@@ -13,4 +13,9 @@
                                  "Super LOVE=Super LIVE!", "SUNNY DAY SONG", "Bokutachi wa Hitotsu no Hikari", "Future style",
                                  "HEART to HEART!", "Korekara", "MOMENT RING", "Pure girls project",
                                 "CheerDay CheerGirl!", "WAO-WAO Powerful day!"], 
-"group": ["µ's", "Muse"]}]
+"group": ["µ's", "Muse"]}, 
+{"flag": "idol", "name": ["Ayase Eli", "Eli Ayase", "Eli", "絢瀬 絵里", "絵里 絢瀬", "絵里"], "voice actress": ["Nanjou Yoshino", "南條 愛乃"],
+"color": "Light Blue", "centersJP":["Mermaid festa vol.1", "LONELIEST BABY", "Angelic Angel"],
+                       "centersEN":["Mermaid festa vol.1", "LONELIEST BABY", "Angelic Angel"],
+"group": ["µ's", "Muse"]},
+]
