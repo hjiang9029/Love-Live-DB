@@ -6,15 +6,30 @@ package main;
 /**
  * A class representing a song.
  * @version 2018-01-01
- * @author Henry
+ * @author Henry Jiang
  *
  */
 public class Song {
     
+    /**
+     * the name romanized or english to represent the song.
+     */
     private final String name;
     
+    /**
+     * the name in japanese.
+     */
+    private final String jpName;
+    
+    /**
+     * the center for this song. This may or may not exist.
+     */
     private final Idol center;
     
+    /**
+     * the group this song belongs to. Can belong to either a
+     * main group or a sub unit.
+     */
     private IdolGroup group;
     
     /**
@@ -23,8 +38,9 @@ public class Song {
      * @param name a string.
      * @param center an idol.
      */
-    public Song(String name, Idol center) {
+    public Song(String name, String jpName, Idol center) {
         this.name = name;
+        this.jpName = jpName;
         this.center = center;
     }
     
@@ -33,8 +49,9 @@ public class Song {
      * have a center use this.
      * @param name a string.
      */
-    public Song(String name) {
+    public Song(String name, String jpName) {
         this.name = name;
+        this.jpName = jpName;
         this.center = null;
     }
     
@@ -48,7 +65,8 @@ public class Song {
     @Override
     public String toString() {
         String result = "";
-        result += "Name: " + name;
+        result += "Name (JP): " + jpName;
+        result += "\nName (EN): " + name;
         if (group != null) {
             result += "\nGroup: " + group;
         }

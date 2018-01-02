@@ -9,8 +9,11 @@ import java.util.ArrayList;
  * A class representing a sub unit. A sub unit has
  * three members, a name, a main group and a list of songs.
  * 
+ * Should create 6 instances of this type of object at the beginning,
+ * 3 for each Main Group.
+ * 
  * @version 2018-01-01
- * @author Henry
+ * @author Henry Jiang
  *
  */
 public class SubUnit implements IdolGroup {
@@ -60,6 +63,9 @@ public class SubUnit implements IdolGroup {
      */
     @Override
     public void addSong(Song song) {
+        if (main.getSongs().contains(song)) {
+            main.removeSong(song);
+        }
         song.setGroup(this);
         songs.add(song);
     }
@@ -78,6 +84,16 @@ public class SubUnit implements IdolGroup {
     @Override
     public String getName() {
         return name;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String result = "";
+        result += "Name: " + name;
+        return result;
     }
 
 }

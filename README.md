@@ -5,3 +5,5 @@
     "misc" section in the .json. </p>
 </br>
 <p> The Aqours group is different in that many of their songs do not have a center, therefore a temporary "dummy" object is created to store songs. In the       same object, the sub unit songs will also be stored. However, if a song does have an official center, they will be stored the same way as the µ's songs.     Also in the same vein, any solos, duets or trios are stored in an idol's misc section. </p>
+</br>
+<p> Also the songs are entered in the .json are entered based on chronological order. When editing the .json, the implementation of the parser will take that into account and use that as part of its implementation. </p>

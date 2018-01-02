@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * A class representing an idol/character and its methods.
  * @version 2017-12-31
- * @author Henry
+ * @author Henry Jiang
  *
  */
 public class Idol {
@@ -111,11 +111,26 @@ public class Idol {
     /**
      * creates and adds a center for this idol. also
      * adds it to the main group's list of songs.
-     * @param name
+     * 
+     * @param name the name of the song to add.
+     * @param jpName the name in japanese.
      */
-    public void addCenter(String name) {
-        Song song = new Song(name, this);
+    public void addCenter(String name, String jpName) {
+        Song song = new Song(name, jpName, this);
         centers.add(song);
+        groups[0].addSong(song);
+    }
+    
+    /**
+     * creates and adds a solo/duo/trio song for this idol.
+     * Also adds the song to the main group's list of songs.
+     * 
+     * @param name the name of the song to add.
+     * @param jpName the name in japanese.
+     */
+    public void addMisc(String name, String jpName) {
+        Song song = new Song(name, jpName, this);
+        misc.add(song);
         groups[0].addSong(song);
     }
 }
