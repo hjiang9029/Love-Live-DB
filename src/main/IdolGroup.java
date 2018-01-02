@@ -4,35 +4,37 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
- * A class representing an idol group and its methods.
- * @version 2017-12-31
+ * An interface representing an idol group.
+ * @version 2018-01-01
  * @author Henry Jiang
  *
  */
-public class IdolGroup {
+public interface IdolGroup {
     
     /**
-     * a string to represent the name of the group.
+     * adds an idol to the group.
+     * @param idol an idol object.
      */
-    private final ArrayList<String> names;
+    void addIdol(Idol idol);
     
     /**
-     * an array list to represent the idols in the group.
+     * adds a song to the group.
+     * @param song a song object.
      */
-    private ArrayList<Idol> idols;
+    void addSong(Song song);
     
-    public IdolGroup(String[] names) {
-        idols = new ArrayList<Idol>(9);
-        this.names = new ArrayList<String>();
-        this.names.addAll(Arrays.asList(names));
-    }
+    /**
+     * gets the list of songs.
+     * @return a list of songs.
+     */
+    ArrayList<Song> getSongs();
     
-    public void addIdol(Idol idol) {
-        if (idols.size() != 9) {
-            idols.add(idol);
-        }
-    }
+    /**
+     * gets the list of names.
+     * @return a list of names.
+     */
+    String getName();
+    
 }

@@ -29,11 +29,20 @@ public class Idol {
      */
     private final String color;
     
-    // List of songs this idol centers in.
-    // private final ArrayList<Songs> centers;
+    /**
+     * List of songs this idol centers in.
+     */
+    private ArrayList<Song> centers;
     
-    // List of solos, duets or trios.
-    // private final ArrayList<Songs> misc;
+    /**
+     * List of solos, duets or trios.
+     */
+    private ArrayList<Song> misc;
+    
+    /**
+     * The groups this Idol is in (Includes sub unit).
+     */
+    private IdolGroup[] groups;
     
     /**
      * constructor for the idol class. Takes in two array of strings
@@ -49,6 +58,11 @@ public class Idol {
         
         vaName = new ArrayList<String>();
         vaName.addAll(Arrays.asList(voiceActress));
+        
+        centers = new ArrayList<Song>();
+        misc = new ArrayList<Song>();
+        
+        groups = new IdolGroup[1];
         
         this.color = color;
     }
@@ -75,5 +89,33 @@ public class Idol {
      */
     public String getColor() {
         return color;
+    }
+    
+    /**
+     * assigns the idol group a position in the array
+     * depending on whether the object is a main group
+     * or a sub unit.
+     * @param group
+     */
+    public void assignGroup(IdolGroup group) {
+        // the first IdolGroup must be a main group.
+        if (group instanceof MainGroup) {
+            groups[0] = group;
+        }
+        // the second IdolGroup must be a sub unit.
+        else if (group instanceof SubUnit) {
+            groups[1] = group;
+        }
+    }
+    
+    /**
+     * creates and adds a center for this idol. also
+     * adds it to the main group's list of songs.
+     * @param name
+     */
+    public void addCenter(String name) {
+        Song song = new Song(name, this);
+        centers.add(song);
+        groups[0].addSong(song);
     }
 }

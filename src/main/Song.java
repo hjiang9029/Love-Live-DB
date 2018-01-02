@@ -15,6 +15,8 @@ public class Song {
     
     private final Idol center;
     
+    private IdolGroup group;
+    
     /**
      * Constructor for a song. Takes in a name as a string
      * and an Idol object for the center.
@@ -35,15 +37,25 @@ public class Song {
         this.name = name;
         this.center = null;
     }
+    
+    public void setGroup(IdolGroup group) {
+        this.group = group;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        if (center == null) {
-            return name;
-        } return name + "\n Center: " + center.getNames().get(0);
+        String result = "";
+        result += "Name: " + name;
+        if (group != null) {
+            result += "\nGroup: " + group;
+        }
+        if (center != null) {
+            result += "\nCenter: " + center; 
+        }
+        return result;
     }
     
 }
