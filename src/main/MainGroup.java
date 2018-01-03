@@ -4,6 +4,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A class that represents the main groups. A main group has
@@ -36,11 +37,11 @@ public class MainGroup implements IdolGroup {
     /**
      * the list of songs this object has.
      */
-    private ArrayList<Song> songs;
+    private HashMap<Integer, Song> songs;
     
     public MainGroup(String name) {
         this.idols = new ArrayList<Idol>(9);
-        this.songs = new ArrayList<Song>();
+        this.songs = new HashMap<Integer, Song>();
         this.name = name;
         this.units = new ArrayList<SubUnit>();
     }
@@ -85,10 +86,9 @@ public class MainGroup implements IdolGroup {
      * @param song the song to remove.
      */
     public void removeSong(Song song) {
-        if (songs.contains(song)) {
-            int position = songs.indexOf(song);
-            songs.get(position).setGroup(null);
-            songs.remove(song);
+        if (songs.containsValue(song)) {
+            songs.get(song.hashCode()).setGroup(null);
+            songs.remove(song.hashCode());
         }
     }
 
@@ -107,17 +107,33 @@ public class MainGroup implements IdolGroup {
      */
     @Override
     public void addSong(Song song) {
-        if (!songs.contains(song)) {
+        if (!songs.containsValue(song) && !checkSubUnits(song)) {
             song.setGroup(this);
-            songs.add(song);
+            songs.put(song.hashCode() ,song);
         }
+    }
+    
+    /**
+     * helper method for addSong, checks if the sub unit has the song
+     * the main group is trying to add. 
+     * 
+     * @param song a song.
+     * @return true if any of the sub units contain the song, false if not.
+     */
+    private boolean checkSubUnits(Song song) {
+        for (SubUnit unit : units) {
+            if (unit.getSongs().containsValue(song)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /* (non-Javadoc)
      * @see main.IdolGroup#getSongs()
      */
     @Override
-    public ArrayList<Song> getSongs() {
+    public HashMap<Integer, Song> getSongs() {
         return songs;
     }
 

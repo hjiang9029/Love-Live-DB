@@ -4,6 +4,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A class representing a sub unit. A sub unit has
@@ -26,7 +27,7 @@ public class SubUnit implements IdolGroup {
     /**
      * the list of songs for the sub unit.
      */
-    private ArrayList<Song> songs;
+    private HashMap<Integer, Song> songs;
     
     /**
      * the list of idols in the sub unit.
@@ -40,7 +41,7 @@ public class SubUnit implements IdolGroup {
     
     public SubUnit(String name) {
         this.name = name;
-        songs = new ArrayList<Song>();
+        songs = new HashMap<Integer, Song>();
         idols = new ArrayList<Idol>();
     }
 
@@ -63,18 +64,18 @@ public class SubUnit implements IdolGroup {
      */
     @Override
     public void addSong(Song song) {
-        if (main.getSongs().contains(song)) {
+        if (main.getSongs().containsValue(song)) {
             main.removeSong(song);
         }
         song.setGroup(this);
-        songs.add(song);
+        songs.put(song.hashCode(), song);
     }
 
     /* (non-Javadoc)
      * @see main.IdolGroup#getSongs()
      */
     @Override
-    public ArrayList<Song> getSongs() {
+    public HashMap<Integer, Song> getSongs() {
         return songs;
     }
 

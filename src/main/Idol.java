@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  * A class representing an idol/character and its methods.
- * @version 2017-12-31
+ * @version 2018-01-01
  * @author Henry Jiang
  *
  */
@@ -16,6 +16,7 @@ public class Idol {
 
     /**
      * The list of names this idol can be represented.
+     * The first half of the
      */
     private final ArrayList<String> names;
     

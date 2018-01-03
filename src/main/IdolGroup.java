@@ -3,7 +3,7 @@
  */
 package main;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * An interface representing an idol group.
@@ -29,7 +29,7 @@ public interface IdolGroup {
      * gets the list of songs.
      * @return a list of songs.
      */
-    ArrayList<Song> getSongs();
+    HashMap<Integer, Song> getSongs();
     
     /**
      * gets the list of names.
