@@ -93,7 +93,7 @@ public class Idol {
     }
     
     /**
-     * assigns the idol group a position in the array
+     * assigns the idolgroup a position in the array
      * depending on whether the object is a main group
      * or a sub unit.
      * @param group

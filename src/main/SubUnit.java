@@ -56,6 +56,7 @@ public class SubUnit implements IdolGroup {
     public void addIdol(Idol idol) {
         if (idols.size() < 3) {
             idols.add(idol);
+            idol.assignGroup(this);
         }
     }
 

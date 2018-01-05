@@ -99,6 +99,7 @@ public class MainGroup implements IdolGroup {
     public void addIdol(Idol idol) {
         if (idols.size() < 9) {
             idols.add(idol);
+            idol.assignGroup(this);
         }
     }
     
