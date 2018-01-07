@@ -61,6 +61,7 @@ public class MainGroup implements IdolGroup {
     public void addSubUnit(SubUnit sub) {
         if (units.size() < 3 && !(units.contains(sub))) {
             units.add(sub);
+            sub.setMain(this);
         }
     }
     
@@ -74,7 +75,27 @@ public class MainGroup implements IdolGroup {
             SubUnit newUnit = new SubUnit(sub);
             if (!units.contains(newUnit)) {
                 units.add(newUnit);
+                newUnit.setMain(this);
             }
+        }
+    }
+    
+    /**
+     * Overloaded method to add a sub unit. If the
+     * sub unit already exists, just add the idol.
+     * Otherwise add the idol to the sub unit then
+     * add the new sub unit to the list.\
+     * 
+     * @param sub a string representing the name of the group.
+     * @param idol an idol.
+     */
+    public void addSubUnit(String sub, Idol idol) {
+        SubUnit newUnit = new SubUnit(sub);
+        if (!units.contains(newUnit)) {
+            newUnit.addIdol(idol);
+            addSubUnit(newUnit);
+        } else {
+            getSubUnit(newUnit).addIdol(idol);
         }
     }
     

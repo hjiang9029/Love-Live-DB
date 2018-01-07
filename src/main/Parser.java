@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
  * The parser for the program. This class will read
  * the json file and assign data based on the file.
  * 
- * @version 2017-01-06
+ * @version 2018-01-06
  * @author Henry Jiang
  *
  */
@@ -103,11 +103,11 @@ public class Parser {
         switch (group) {
             case "µ's":
                 Muse.addIdol(idol);
-                Muse.addSubUnit(subUnit);
+                Muse.addSubUnit(subUnit, idol);
                 break;
             case "Aqours":
                 Aqours.addIdol(idol);
-                Aqours.addSubUnit(subUnit);
+                Aqours.addSubUnit(subUnit, idol);
                 break;
             default:
                 // should never get here.
@@ -172,11 +172,19 @@ public class Parser {
     private void handleSpecial(JSONObject object) {
         final int numberOfGroups = 6;
         ArrayList<String> toDo = new ArrayList<String>();
-        for (Iterator iter = object.keySet().iterator(); iter.hasNext();) {
+        
+        for (Iterator<?> iter = object.keySet().iterator(); iter.hasNext();) {
             String key = (String) iter.next();
             toDo.add(key);
         }
-        for (int i = 2; i < numberOfGroups; i += 2) {
+        
+        // Special case: only one muse song -- Endless Parade.
+        JSONArray muse = (JSONArray) object.get("muse");
+        String endless = (String) muse.get(0);
+        Song parade = new Song(endless, endless);
+        Muse.addSong(parade);
+        
+        for (int i = 3; i < numberOfGroups; i += 2) {
             String taskJP = toDo.get(i);
             String group = taskJP.substring(0, taskJP.length() - 2);
             String taskEN = group + "EN";
@@ -224,6 +232,10 @@ public class Parser {
     }
     
     private void handleAqours(JSONArray enNames, JSONArray jpNames) {
-        
+        for (int i = 0; i < enNames.size(); i++) {
+            String nameEN = (String) enNames.get(i);
+            String nameJP = (String) jpNames.get(i);
+            Aqours.addSong(nameEN, nameJP);
+        }
     }
 }

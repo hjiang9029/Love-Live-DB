@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  * A class representing an idol/character and its methods.
- * @version 2018-01-01
+ * @version 2018-01-06
  * @author Henry Jiang
  *
  */
@@ -63,7 +63,7 @@ public class Idol {
         centers = new ArrayList<Song>();
         misc = new ArrayList<Song>();
         
-        groups = new IdolGroup[1];
+        groups = new IdolGroup[2];
         
         this.color = color;
     }
