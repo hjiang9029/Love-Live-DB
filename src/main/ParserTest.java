@@ -26,6 +26,16 @@ public class ParserTest {
     public void test() {
         assertEquals(3, Parser.Muse.getSubUnits().size());
         assertEquals(3, Parser.Aqours.getSubUnits().size());
+        assertEquals(9, Parser.Muse.getIdols().size());
+        assertEquals(9, Parser.Aqours.getIdols().size());
+        Parser.Muse.getSubUnits();
+        Parser.Aqours.getSubUnits();
+        Parser.Muse.getIdols();
+        Parser.Aqours.getIdols();
+        assertEquals(113, Parser.Muse.getTotalSongs());
+        assertEquals(59, Parser.Aqours.getTotalSongs());
     }
+    
+    
 
 }

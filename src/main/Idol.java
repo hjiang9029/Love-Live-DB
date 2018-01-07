@@ -130,7 +130,7 @@ public class Idol {
      * @param jpName the name in japanese.
      */
     public void addMisc(String name, String jpName) {
-        Song song = new Song(name, jpName, this);
+        Song song = new Song(name, jpName);
         misc.add(song);
         groups[0].addSong(song);
     }

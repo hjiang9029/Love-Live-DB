@@ -122,6 +122,7 @@ public class Parser {
      * @param idol the idol to add the songs to. (current idol).
      */
     private void handleSongs(JSONObject object, Idol idol) {
+        
         JSONArray centersEN = (JSONArray) object.get("centersEN");
         JSONArray centersJP = (JSONArray) object.get("centersJP");
         JSONArray miscEN = (JSONArray) object.get("miscEN");
@@ -170,12 +171,13 @@ public class Parser {
      * Sub unit songs.
      */
     private void handleSpecial(JSONObject object) {
-        final int numberOfGroups = 6;
         ArrayList<String> toDo = new ArrayList<String>();
         
         for (Iterator<?> iter = object.keySet().iterator(); iter.hasNext();) {
             String key = (String) iter.next();
-            toDo.add(key);
+            if (!key.equals("name") && !key.equals("muse")) {
+                toDo.add(key);
+            }
         }
         
         // Special case: only one muse song -- Endless Parade.
@@ -184,16 +186,13 @@ public class Parser {
         Song parade = new Song(endless, endless);
         Muse.addSong(parade);
         
-        for (int i = 3; i < numberOfGroups; i += 2) {
-            String taskJP = toDo.get(i);
-            String group = taskJP.substring(0, taskJP.length() - 2);
-            String taskEN = group + "EN";
-            JSONArray enNames = (JSONArray) object.get(taskEN);
-            JSONArray jpNames = (JSONArray) object.get(taskJP);
-            if (taskEN.substring(0, taskEN.length() - 2).equals("centers")) {
-                handleAqours(enNames, jpNames);
+        for (int i = 0; i < toDo.size(); i++) {
+            String task = toDo.get(i);
+            JSONArray taskName = (JSONArray) object.get(task);
+            if (task.equals("centers")) {
+                handleAqours(taskName);
             } else {
-                handleSpecialSongs(enNames, jpNames, group);
+                handleSpecialSongs(taskName, task);
             }
         }
     }
@@ -204,9 +203,16 @@ public class Parser {
      * @param jpNames the name as a string in Japanese.
      * @param groupName the sub unit name as a string.
      */
-    private void handleSpecialSongs(JSONArray enNames, JSONArray jpNames, String groupName) {
+    private void handleSpecialSongs(JSONArray taskName, String groupName) {
         SubUnit check = new SubUnit(groupName);
         MainGroup toUse = checkGroup(check);
+        
+        JSONObject jsonSongJP = (JSONObject) taskName.get(0);
+        JSONObject jsonSongEN = (JSONObject) taskName.get(1);
+        
+        JSONArray jpNames = (JSONArray) jsonSongJP.get("JP");
+        JSONArray enNames = (JSONArray) jsonSongEN.get("EN");
+        
         for (int i = 0; i < enNames.size(); i++) {
             String nameEN = (String) enNames.get(i);
             String nameJP = (String) jpNames.get(i);
@@ -228,10 +234,17 @@ public class Parser {
         } else if (Aqours.getSubUnits().contains(toCheck)) {
             return Aqours;
         }
-        return null;
+        // should not get here.
+        throw new IllegalArgumentException("No main group with this sub unit.");
     }
     
-    private void handleAqours(JSONArray enNames, JSONArray jpNames) {
+    private void handleAqours(JSONArray taskName) {
+        JSONObject jsonSongJP = (JSONObject) taskName.get(0);
+        JSONObject jsonSongEN = (JSONObject) taskName.get(1);
+        
+        JSONArray jpNames = (JSONArray) jsonSongJP.get("JP");
+        JSONArray enNames = (JSONArray) jsonSongEN.get("EN");
+        
         for (int i = 0; i < enNames.size(); i++) {
             String nameEN = (String) enNames.get(i);
             String nameJP = (String) jpNames.get(i);

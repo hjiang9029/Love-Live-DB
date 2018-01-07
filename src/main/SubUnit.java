@@ -78,7 +78,8 @@ public class SubUnit implements IdolGroup {
     @Override
     public void addSong(String nameEN, String nameJP) {
         Song song = new Song(nameEN, nameJP);
-        if (main.getSongs().containsValue(song)) {
+        if (main.getSongs().get(song.hashCode()) != null
+            && main.getSongs().get(song.hashCode()).equals(song)) {
             main.removeSong(song);
         }
         song.setGroup(this);

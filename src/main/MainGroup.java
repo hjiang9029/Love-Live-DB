@@ -142,10 +142,18 @@ public class MainGroup implements IdolGroup {
      * @param song the song to remove.
      */
     public void removeSong(Song song) {
-        if (songs.containsValue(song)) {
+        if (songs.get(song.hashCode()) != null) {
             songs.get(song.hashCode()).setGroup(null);
             songs.remove(song.hashCode());
         }
+    }
+
+    /**
+     * returns the list of idols.
+     * @return the idols
+     */
+    public ArrayList<Idol> getIdols() {
+        return idols;
     }
 
     /* (non-Javadoc)

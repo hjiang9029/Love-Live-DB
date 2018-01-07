@@ -58,6 +58,10 @@ public class Song {
     public void setGroup(IdolGroup group) {
         this.group = group;
     }
+    
+    public String getName() {
+        return this.name;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
