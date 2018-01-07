@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Should create 6 instances of this type of object at the beginning,
  * 3 for each Main Group.
  * 
- * @version 2018-01-01
+ * @version 2018-01-06
  * @author Henry Jiang
  *
  */
@@ -71,6 +71,19 @@ public class SubUnit implements IdolGroup {
         song.setGroup(this);
         songs.put(song.hashCode(), song);
     }
+    
+    /* (non-Javadoc)
+     * @see main.IdolGroup#addSong(main.Song)
+     */
+    @Override
+    public void addSong(String nameEN, String nameJP) {
+        Song song = new Song(nameEN, nameJP);
+        if (main.getSongs().containsValue(song)) {
+            main.removeSong(song);
+        }
+        song.setGroup(this);
+        songs.put(song.hashCode(), song);
+    }
 
     /* (non-Javadoc)
      * @see main.IdolGroup#getSongs()
@@ -86,6 +99,26 @@ public class SubUnit implements IdolGroup {
     @Override
     public String getName() {
         return name;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        
+        SubUnit other = (SubUnit) obj;
+        
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        return true;
     }
 
     /* (non-Javadoc)

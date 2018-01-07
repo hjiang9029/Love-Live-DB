@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Should create two static objects of this type at the beginning,
  * one for Muse, one for Aqours.
  * 
- * @version 2018-01-01
+ * @version 2018-01-06
  * @author Henry Jiang
  *
  */
@@ -39,6 +39,13 @@ public class MainGroup implements IdolGroup {
      */
     private HashMap<Integer, Song> songs;
     
+    /**
+     * constructor for a main group. a main group has a
+     * name, list of idols, a list of songs and a list of 
+     * sub units.
+     * 
+     * @param name a string.
+     */
     public MainGroup(String name) {
         this.idols = new ArrayList<Idol>(9);
         this.songs = new HashMap<Integer, Song>();
@@ -49,11 +56,25 @@ public class MainGroup implements IdolGroup {
     /**
      * adds a sub unit to this group. A main group can only have up
      * to 3 sub units.
-     * @param sub
+     * @param sub the sub unit to add.
      */
     public void addSubUnit(SubUnit sub) {
-        if (units.size() < 3) {
+        if (units.size() < 3 && !(units.contains(sub))) {
             units.add(sub);
+        }
+    }
+    
+    /**
+     * Overloaded method to add a sub unit. Creates a sub unit with a string
+     * then adds the sub unit.
+     * @param sub a string.
+     */
+    public void addSubUnit(String sub) {
+        if (units.size() < 3) {
+            SubUnit newUnit = new SubUnit(sub);
+            if (!units.contains(newUnit)) {
+                units.add(newUnit);
+            }
         }
     }
     
@@ -63,6 +84,20 @@ public class MainGroup implements IdolGroup {
      */
     public ArrayList<SubUnit> getSubUnits() {
         return units;
+    }
+    
+    /**
+     * returns a specific sub unit.
+     * @return a subunit.
+     */
+    public SubUnit getSubUnit(SubUnit unit) {
+        for (int i = 0; i <= units.size(); i++) {
+            if (units.get(i).equals(unit)) {
+                return units.get(i);
+            }
+        }
+        // Should not get here.
+        return null;
     }
     
     /**
@@ -110,7 +145,16 @@ public class MainGroup implements IdolGroup {
     public void addSong(Song song) {
         if (!songs.containsValue(song) && !checkSubUnits(song)) {
             song.setGroup(this);
-            songs.put(song.hashCode() ,song);
+            songs.put(song.hashCode(), song);
+        }
+    }
+    
+    @Override
+    public void addSong(String nameEN, String nameJP) {
+        Song song = new Song(nameEN, nameJP);
+        if (!songs.containsValue(song) && !checkSubUnits(song)) {
+            song.setGroup(this);
+            songs.put(song.hashCode(), song);
         }
     }
     
@@ -145,6 +189,5 @@ public class MainGroup implements IdolGroup {
     public String getName() {
         return name;
     }
-
     
 }
