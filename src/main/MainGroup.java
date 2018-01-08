@@ -218,5 +218,53 @@ public class MainGroup implements IdolGroup {
     public String getName() {
         return name;
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String result = "";
+        result += "Name: " + name;
+        result += "\nMembers: "; 
+        result += turnToString(idols);
+        result += "\nSub Units: ";
+        result += turnToString(units);
+        result += "\nSongs: ";
+        result += turnToString(songs);
+        return result;
+    }
     
+    public static String turnToString(ArrayList<?> items) {
+        String result = "";
+        for (int i = 0; i < items.size(); i++) {
+            if (i != items.size() - 1) {
+                if ((i + 1) % 5 != 0) {
+                    result += items.get(i) + ", ";
+                } else {
+                    result += "\n" + items.get(i) + ", ";
+                }
+            } else {
+                result += items.get(i);
+            }
+        }
+        return result;
+    }
+    
+    public static String turnToString(HashMap<Integer, Song> items) {
+        String result = "";
+        int valueSize = items.values().size();
+        int count = 0;
+        for (Song song : items.values()) {
+            if (count != valueSize) {
+                if (!(count % 5 == 0)) {
+                    result += song.toStringEN() + ", ";   
+                } else {
+                    result += "\n" + song.toStringEN() + ", ";
+                }
+            }
+            count++;
+        }
+        return result;
+    }
 }

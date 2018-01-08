@@ -34,6 +34,9 @@ public class ParserTest {
         Parser.Aqours.getIdols();
         assertEquals(113, Parser.Muse.getTotalSongs());
         assertEquals(59, Parser.Aqours.getTotalSongs());
+        System.out.println(Parser.Muse);
+        System.out.println();
+        System.out.println(Parser.Muse.getIdols().get(0).toStringFull());
     }
     
     

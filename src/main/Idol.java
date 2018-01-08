@@ -5,6 +5,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * A class representing an idol/character and its methods.
@@ -33,12 +34,12 @@ public class Idol {
     /**
      * List of songs this idol centers in.
      */
-    private ArrayList<Song> centers;
+    private HashMap<Integer, Song> centers;
     
     /**
      * List of solos, duets or trios.
      */
-    private ArrayList<Song> misc;
+    private HashMap<Integer, Song> misc;
     
     /**
      * The groups this Idol is in (Includes sub unit).
@@ -60,8 +61,8 @@ public class Idol {
         vaName = new ArrayList<String>();
         vaName.addAll(Arrays.asList(voiceActress));
         
-        centers = new ArrayList<Song>();
-        misc = new ArrayList<Song>();
+        centers = new HashMap<Integer, Song>();
+        misc = new HashMap<Integer, Song>();
         
         groups = new IdolGroup[2];
         
@@ -118,7 +119,7 @@ public class Idol {
      */
     public void addCenter(String name, String jpName) {
         Song song = new Song(name, jpName, this);
-        centers.add(song);
+        centers.put(song.hashCode(), song);
         groups[0].addSong(song);
     }
     
@@ -131,7 +132,28 @@ public class Idol {
      */
     public void addMisc(String name, String jpName) {
         Song song = new Song(name, jpName);
-        misc.add(song);
+        misc.put(song.hashCode(), song);
         groups[0].addSong(song);
+    }
+    
+    public String toStringFull() {
+        String result = "";
+        result += "Names: ";
+        result += MainGroup.turnToString(names);
+        result += "\nGroup: ";
+        result += groups[0].getName();
+        result += "\nVoice Actress: " + MainGroup.turnToString(vaName);
+        result += "\nCenters: " + MainGroup.turnToString(centers);
+        result += "\nSolos/Duos/Trios: " + MainGroup.turnToString(misc);
+        result += "\nSub unit: " + groups[1].getName();
+        return result;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return names.get(0);
     }
 }

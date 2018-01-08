@@ -128,7 +128,7 @@ public class SubUnit implements IdolGroup {
     @Override
     public String toString() {
         String result = "";
-        result += "Name: " + name;
+        result += name;
         return result;
     }
 

@@ -97,6 +97,14 @@ public class Song {
             return false;
         return true;
     }
+    
+    /**
+     * Returns the english name.
+     * @return
+     */
+    public String toStringEN() {
+        return name;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
@@ -114,5 +122,4 @@ public class Song {
         }
         return result;
     }
-    
 }
