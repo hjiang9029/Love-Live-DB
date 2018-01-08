@@ -30,16 +30,26 @@ public class Main {
         System.out.println("Square bracket fields are required, and Curly brackets are"
                 + "Optional.");
 
-        System.out.println("Please enter input");
         while (true) {
+            System.out.println("Please enter input");
             String entered = input.nextLine();
             String[] splitted = entered.split(" ");
             
-            String item = splitted[0];
+            String item = "";
             Language toUse = null;
-            if (splitted.length == 2) {
-                toUse = chooseLanguage(splitted[1]);
+            
+            for (String string : splitted) {
+                if (string.equalsIgnoreCase("EN") || string.equalsIgnoreCase("JP")) {
+                    try {
+                        toUse = chooseLanguage(splitted[splitted.length - 1]);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("No such language");
+                    }
+                } else {
+                    item += string + " ";
+                }
             }
+            compute(item.trim(), toUse);
         }
     }
     
@@ -63,16 +73,92 @@ public class Main {
     }
     
     private static void compute(String input1, Language input2) {
-        
+        String result = "";
         if (input2 == null) {
-            switch(input1.toLowerCase()) {
-            //TODO
+            try {
+                result = findElement(input1);
+                System.out.println(result);
+            } catch (IllegalArgumentException e) {
+                System.out.println("No such element.");
+            }
+        } else {
+            try {
+                result = findElement(input1, input2);
+                System.out.println(result);
+            } catch (IllegalArgumentException e) {
+                System.out.println("No such element.");
             }
         }
     }
     
-    private static void handleSubUnit(String name) {
-        
+    private static String findElement(String input) {
+        if (Parser.Aqours.getName().equalsIgnoreCase(input)) {
+            return Parser.Aqours.toString();
+        } else if (Parser.Muse.getName().equalsIgnoreCase(input)) {
+            return Parser.Muse.toString();
+        }
+        MainGroup[] groups = {Parser.Muse, Parser.Aqours};
+        for (MainGroup main : groups) {
+            for (SubUnit sub : main.getSubUnits()) {
+                if (sub.getName().equalsIgnoreCase(input)) {
+                    return sub.toStringFull();
+                } else {
+                    for (Idol idol : sub.getIdols()) {
+                        for (String name : idol.getNames()) {
+                            if (name.equalsIgnoreCase(input)) {
+                                return idol.toStringFull();
+                            }
+                        }
+                    }
+                    for (Song song : sub.getSongs().values()) {
+                        if (song.getName().equalsIgnoreCase(input)) {
+                            return song.toString();
+                        }
+                    }
+                }
+            }
+            for (Song song : main.getSongs().values()) {
+                if (song.getName().equalsIgnoreCase(input)) {
+                    return song.toString();
+                }
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+    
+    private static String findElement(String input, Language lang) {
+        if (Parser.Aqours.getName().equalsIgnoreCase(input)) {
+            return Parser.Aqours.toString(lang);
+        } else if (Parser.Muse.getName().equalsIgnoreCase(input)) {
+            return Parser.Muse.toString(lang);
+        }
+        MainGroup[] groups = {Parser.Muse, Parser.Aqours};
+        for (MainGroup main : groups) {
+            for (SubUnit sub : main.getSubUnits()) {
+                if (sub.getName().equalsIgnoreCase(input)) {
+                    return sub.toString(lang);
+                } else {
+                    for (Idol idol : sub.getIdols()) {
+                        for (String name : idol.getNames()) {
+                            if (name.equalsIgnoreCase(input)) {
+                                return idol.toString(lang);
+                            }
+                        }
+                    }
+                    for (Song song : sub.getSongs().values()) {
+                        if (song.getName().equalsIgnoreCase(input)) {
+                            return song.toString(lang);
+                        }
+                    }
+                }
+            }
+            for (Song song : main.getSongs().values()) {
+                if (song.getName().equalsIgnoreCase(input)) {
+                    return song.toString(lang);
+                }
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
 }

@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @author Henry Jiang
  *
  */
-public class MainGroup implements IdolGroup, AlternateLanguage {
+public class MainGroup implements IdolGroup {
 
     /**
      * the list of names this represents
@@ -290,12 +290,12 @@ public class MainGroup implements IdolGroup, AlternateLanguage {
         for (int i = 0; i < items.size(); i++) {
             if (i != items.size() - 1) {
                 if ((i + 1) % 5 != 0) {
-                    result += items.get(i).toString(lang) + ", ";
+                    result += items.get(i).getName(lang) + ", ";
                 } else {
-                    result += "\n" + items.get(i).toString(lang) + ", ";
+                    result += "\n" + items.get(i).getName(lang) + ", ";
                 }
             } else {
-                result += items.get(i).toString(lang);
+                result += items.get(i).getName(lang);
             }
         }
         return result;
@@ -316,9 +316,9 @@ public class MainGroup implements IdolGroup, AlternateLanguage {
         for (Song song : items.values()) {
             if (count != valueSize) {
                 if (!(count % 5 == 0)) {
-                    result += song.toString(lang) + ", ";
+                    result += song.getName(lang) + ", ";
                 } else {
-                    result += "\n" + song.toString(lang) + ", ";
+                    result += "\n" + song.getName(lang) + ", ";
                 }
             }
             count++;
@@ -335,8 +335,7 @@ public class MainGroup implements IdolGroup, AlternateLanguage {
         result += turnToString(temp, lang);
         result += "\nSub Units: ";
         temp.removeAll(temp);
-        temp.addAll(units);
-        result += turnToString(temp);
+        result += turnToString(units);
         result += "\nSongs: ";
         result += turnToString(songs, lang);
         return result;
@@ -359,4 +358,5 @@ public class MainGroup implements IdolGroup, AlternateLanguage {
         result += turnToString(songs);
         return result;
     }
+
 }

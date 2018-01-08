@@ -79,7 +79,7 @@ public class Song implements AlternateLanguage {
         return this.jpName;
     }
     
-    public String toString(Language lang) {
+    public String getName(Language lang) {
         switch (lang) {
             case EN:
                 return this.name;
@@ -145,6 +145,17 @@ public class Song implements AlternateLanguage {
         return true;
     }
     
+    public String toString(Language lang) {
+        String result = "";
+        result += "Name: " + getName(lang);
+        if (group != null) {
+            result += "\nGroup: " + group.getName();
+        }
+        if (center != null) {
+            result += "\nCenter: " + center.getName(lang); 
+        }
+        return result;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()

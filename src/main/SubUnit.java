@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @author Henry Jiang
  *
  */
-public class SubUnit implements IdolGroup, AlternateLanguage {
+public class SubUnit implements IdolGroup {
 
     /**
      * the name for the sub unit.
@@ -60,6 +60,14 @@ public class SubUnit implements IdolGroup, AlternateLanguage {
             idols.add(idol);
             idol.assignGroup(this);
         }
+    }
+    
+    /**
+     * Gets the list of idols in this sub unit.
+     * @return a list of idols.
+     */
+    public ArrayList<Idol> getIdols() {
+        return this.idols;
     }
 
     /*
@@ -159,7 +167,18 @@ public class SubUnit implements IdolGroup, AlternateLanguage {
         result += "\nMain Group: " + main.getName();
         return result;
     }
-
+    
+    public String toString(Language lang) {
+            String result = "";
+            ArrayList<AlternateLanguage> temp = new ArrayList<AlternateLanguage>();
+            result += "Name: " + name;
+            result += "\nMembers: ";
+            temp.addAll(idols);
+            result += MainGroup.turnToString(temp, lang);
+            result += "\nSongs: " + MainGroup.turnToString(songs, lang);
+            result += "\nMain Group: " + main.getName();
+            return result;
+        }
     /*
      * (non-Javadoc)
      * 
@@ -169,18 +188,8 @@ public class SubUnit implements IdolGroup, AlternateLanguage {
     public String toString() {
         return name;
     }
+    
 
-    @Override
-    public String toString(Language lang) {
-        String result = "";
-        ArrayList<AlternateLanguage> temp = new ArrayList<AlternateLanguage>();
-        result += "Name: " + name;
-        result += "\nMembers: ";
-        temp.addAll(idols);
-        result += MainGroup.turnToString(temp, lang);
-        result += "\nSongs: " + MainGroup.turnToString(songs, lang);
-        result += "\nMain Group: " + main.getName();
-        return result;
-    }
+    
 
 }

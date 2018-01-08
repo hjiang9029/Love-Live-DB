@@ -156,6 +156,10 @@ public class Idol implements AlternateLanguage {
         groups[0].addSong(song);
     }
     
+    /**
+     * Returns all the information the idol has as a string.
+     * @return a string.
+     */
     public String toStringFull() {
         String result = "";
         result += "Names: ";
@@ -170,11 +174,34 @@ public class Idol implements AlternateLanguage {
     }
     
     /**
+     * Returns all the information the idol has as a string in a certain
+     * language.
+     * @return a string.
+     */
+    public String toString(Language lang) {
+        String result = "";
+        result += "Names: ";
+        result += getName(lang);
+        result += "\nGroup: ";
+        result += groups[0].getName();
+        result += "\nVoice Actress: ";
+        if (lang.equals(Language.EN)) {
+            result += vaName.get(0);
+        } else if (lang.equals(Language.JP)) {
+            result += vaName.get(1);
+        }
+        result += "\nCenters: " + MainGroup.turnToString(centers, lang);
+        result += "\nSolos/Duos/Trios: " + MainGroup.turnToString(misc, lang);
+        result += "\nSub unit: " + groups[1].getName();
+        return result;
+    }
+    
+    /**
      * Returns the name in the language specified.
      * @param lang the language.
      * @return the name as a string.
      */
-    public String toString(Language lang) {
+    public String getName(Language lang) {
         if (lang.equals(Language.EN)) {
             return names.get(0);
         } else {

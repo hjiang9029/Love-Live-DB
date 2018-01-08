@@ -10,5 +10,12 @@ package main;
  *
  */
 public interface AlternateLanguage {
+    /**
+     * Returns this information in a certain language.
+     * @param lang the language.
+     * @return a string.
+     */
     String toString(Language lang);
+    
+    String getName(Language lang);
 }
