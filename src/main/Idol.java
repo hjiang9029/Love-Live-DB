@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @author Henry Jiang
  *
  */
-public class Idol {
+public class Idol implements AlternateLanguage {
 
     /**
      * The list of names this idol can be represented.
@@ -76,6 +76,25 @@ public class Idol {
      */
     public ArrayList<String> getNames() {
         return names;
+    }
+    
+    public ArrayList<String> getNames(Language lang) {
+        ArrayList<String> result = new ArrayList<String>();
+        switch (lang) {
+            case EN:
+                for (int i = 0; i < names.size() / 2; i++) {
+                    result.add(names.get(i));
+                }
+                return result;
+            case JP:
+                for (int i = names.size() / 2; i < names.size(); i++) {
+                    result.add(names.get(i));
+                }
+                return result;
+            default:
+                break;
+        }
+        throw new IllegalArgumentException("No such language");
     }
 
     /**
@@ -149,12 +168,29 @@ public class Idol {
         result += "\nSub unit: " + groups[1].getName();
         return result;
     }
+    
+    /**
+     * Returns the name in the language specified.
+     * @param lang the language.
+     * @return the name as a string.
+     */
+    public String toString(Language lang) {
+        if (lang.equals(Language.EN)) {
+            return names.get(0);
+        } else {
+            if (lang.equals(Language.JP)) {
+                return names.get(names.size() / 2);
+            }
+        }
+        // should not get here.
+        return null;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return names.get(0);
+        return "[" + names.get(0) + ", " + names.get(names.size() / 2) + "]";
     }
 }

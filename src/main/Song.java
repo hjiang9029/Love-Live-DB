@@ -9,7 +9,7 @@ package main;
  * @author Henry Jiang
  *
  */
-public class Song {
+public class Song implements AlternateLanguage {
     
     /**
      * the name romanized or english to represent the song.
@@ -71,7 +71,15 @@ public class Song {
         return this.name;
     }
     
-    public String getName(Language lang) {
+    /**
+     * Gets the name of this song. (In Japanese).
+     * @return
+     */
+    public String getJPName() {
+        return this.jpName;
+    }
+    
+    public String toString(Language lang) {
         switch (lang) {
             case EN:
                 return this.name;
@@ -137,13 +145,6 @@ public class Song {
         return true;
     }
     
-    /**
-     * Returns the english name.
-     * @return
-     */
-    public String toStringEN() {
-        return name;
-    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()

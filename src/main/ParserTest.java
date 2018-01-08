@@ -39,6 +39,10 @@ public class ParserTest {
         SubUnit test = new SubUnit("BiBi");
         System.out.println(Parser.Muse.getSong("eien friends"));
         System.out.println(Parser.Muse.getSubUnit(test).getSong("psychic fire"));
+        System.out.println(Parser.Muse.getIdol("Honoka").getNames(Language.EN));
+        System.out.println();
+        System.out.println(Parser.Muse.getSubUnit(test).toString(Language.JP));
+        System.out.println(Parser.Muse.getSubUnit(test).toString(Language.EN));
     }
     
     

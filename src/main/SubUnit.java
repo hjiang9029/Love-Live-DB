@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @author Henry Jiang
  *
  */
-public class SubUnit implements IdolGroup {
+public class SubUnit implements IdolGroup, AlternateLanguage {
 
     /**
      * the name for the sub unit.
@@ -85,8 +85,7 @@ public class SubUnit implements IdolGroup {
     public void addSong(String nameEN, String nameJP) {
         Song song = new Song(nameEN, nameJP);
         Idol center = null;
-        if (main.getSongs().get(song.hashCode()) != null 
-                && main.getSongs().get(song.hashCode()).equals(song)) {
+        if (main.getSongs().get(song.hashCode()) != null && main.getSongs().get(song.hashCode()).equals(song)) {
             center = main.getSongs().get(song.hashCode()).getCenter();
             main.removeSong(song);
         }
@@ -169,6 +168,19 @@ public class SubUnit implements IdolGroup {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public String toString(Language lang) {
+        String result = "";
+        ArrayList<AlternateLanguage> temp = new ArrayList<AlternateLanguage>();
+        result += "Name: " + name;
+        result += "\nMembers: ";
+        temp.addAll(idols);
+        result += MainGroup.turnToString(temp, lang);
+        result += "\nSongs: " + MainGroup.turnToString(songs, lang);
+        result += "\nMain Group: " + main.getName();
+        return result;
     }
 
 }
