@@ -140,7 +140,9 @@ public class Idol implements AlternateLanguage {
     public void addCenter(String name, String jpName) {
         Song song = new Song(name, jpName, this);
         centers.put(song.hashCode(), song);
-        groups[0].addSong(song);
+        if (groups[0] != null) {
+            groups[0].addSong(song);
+        }
     }
     
     /**
@@ -153,7 +155,9 @@ public class Idol implements AlternateLanguage {
     public void addMisc(String name, String jpName) {
         Song song = new Song(name, jpName);
         misc.put(song.hashCode(), song);
-        groups[0].addSong(song);
+        if (groups[0] != null) {
+            groups[0].addSong(song);
+        }
     }
     
     /**

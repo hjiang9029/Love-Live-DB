@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +21,9 @@ import org.json.simple.parser.ParseException;
  */
 public class Parser {
     
-    private static final String filePath = "C:\\Users\\Henry\\eclipse-workspace\\Love Live Database\\data.json";
+    static File currentDir = new File("");
+    static String path = currentDir.getAbsolutePath();
+    private static final String filePath = path + "/data.json";
     
     public static MainGroup Muse = new MainGroup("µ's");
     public static MainGroup Aqours = new MainGroup("Aqours");
@@ -216,7 +219,9 @@ public class Parser {
         for (int i = 0; i < enNames.size(); i++) {
             String nameEN = (String) enNames.get(i);
             String nameJP = (String) jpNames.get(i);
-            toUse.getSubUnit(check).addSong(nameEN, nameJP);
+            if (toUse != null && toUse.getSubUnit(check) != null) {
+                toUse.getSubUnit(check).addSong(nameEN, nameJP);
+            }
         }
     }
     
@@ -234,8 +239,7 @@ public class Parser {
         } else if (Aqours.getSubUnits().contains(toCheck)) {
             return Aqours;
         }
-        // should not get here.
-        throw new IllegalArgumentException("No main group with this sub unit.");
+        return Muse;
     }
     
     private void handleAqours(JSONArray taskName) {

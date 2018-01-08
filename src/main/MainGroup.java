@@ -118,10 +118,15 @@ public class MainGroup implements IdolGroup {
      * @return a subunit.
      */
     public SubUnit getSubUnit(SubUnit unit) {
-        for (int i = 0; i <= units.size(); i++) {
-            if (units.get(i).equals(unit)) {
-                return units.get(i);
+        try {
+            for (int i = 0; i < units.size(); i++) {
+                if (units.get(i).equals(unit)) {
+                    return units.get(i);
+                }
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
         }
         // Should not get here.
         return null;
