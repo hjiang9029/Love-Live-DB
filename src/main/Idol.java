@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  * A class representing an idol/character and its methods.
- * @version 2018-01-06
+ * @version 2018-01-07
  * @author Henry Jiang
  *
  */
@@ -17,7 +17,8 @@ public class Idol {
 
     /**
      * The list of names this idol can be represented.
-     * The first half of the
+     * The first half of the names are in English,
+     * the second half are in Japanese.
      */
     private final ArrayList<String> names;
     

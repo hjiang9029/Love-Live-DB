@@ -5,7 +5,7 @@ package main;
 
 /**
  * A class representing a song.
- * @version 2018-01-01
+ * @version 2018-01-07
  * @author Henry Jiang
  *
  */
@@ -24,7 +24,7 @@ public class Song {
     /**
      * the center for this song. This may or may not exist.
      */
-    private final Idol center;
+    private Idol center;
     
     /**
      * the group this song belongs to. Can belong to either a
@@ -55,12 +55,51 @@ public class Song {
         this.center = null;
     }
     
+    /**
+     * Sets the idol group for this song.
+     * @param group
+     */
     public void setGroup(IdolGroup group) {
         this.group = group;
     }
     
+    /**
+     * Gets the name of this song. (In English).
+     * @return
+     */
     public String getName() {
         return this.name;
+    }
+    
+    public String getName(Language lang) {
+        switch (lang) {
+            case EN:
+                return this.name;
+            case JP:
+                return this.jpName;
+            default:
+                break;
+        }
+        throw new IllegalArgumentException("No such language");
+    }
+    
+    /**
+     * Gets the center for this song.
+     * @return an Idol.
+     */
+    public Idol getCenter() {
+        if (center != null) {
+            return this.center;
+        }
+        throw new IllegalArgumentException("There is no center for this...");
+    }
+    
+    /**
+     * Sets the center for this song.
+     * @param center
+     */
+    public void setCenter(Idol center) {
+        this.center = center;
     }
 
     /* (non-Javadoc)
@@ -115,7 +154,7 @@ public class Song {
         result += "Name (JP): " + jpName;
         result += "\nName (EN): " + name;
         if (group != null) {
-            result += "\nGroup: " + group;
+            result += "\nGroup: " + group.getName();
         }
         if (center != null) {
             result += "\nCenter: " + center; 

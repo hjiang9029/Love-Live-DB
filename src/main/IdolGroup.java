@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 /**
  * An interface representing an idol group.
- * @version 2018-01-06
+ * @version 2018-01-07
  * @author Henry Jiang
  *
  */
@@ -34,6 +34,12 @@ public interface IdolGroup {
      * @param nameJP a string.
      */
     void addSong(String nameEN, String nameJP);
+    
+    /**
+     * Gets the song with the given name in the list of songs.
+     * @param name
+     */
+    Song getSong(String name);
     
     /**
      * gets the list of songs.

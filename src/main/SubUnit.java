@@ -7,38 +7,38 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * A class representing a sub unit. A sub unit has
- * three members, a name, a main group and a list of songs.
+ * A class representing a sub unit. A sub unit has three members, a name, a main
+ * group and a list of songs.
  * 
- * Should create 6 instances of this type of object at the beginning,
- * 3 for each Main Group.
+ * Should create 6 instances of this type of object at the beginning, 3 for each
+ * Main Group.
  * 
- * @version 2018-01-06
+ * @version 2018-01-07
  * @author Henry Jiang
  *
  */
 public class SubUnit implements IdolGroup {
-    
+
     /**
      * the name for the sub unit.
      */
     private String name;
-    
+
     /**
      * the list of songs for the sub unit.
      */
     private HashMap<Integer, Song> songs;
-    
+
     /**
      * the list of idols in the sub unit.
      */
     private ArrayList<Idol> idols;
-    
+
     /**
      * the main group this sub unit is a part of.
      */
     private MainGroup main;
-    
+
     public SubUnit(String name) {
         this.name = name;
         songs = new HashMap<Integer, Song>();
@@ -48,8 +48,10 @@ public class SubUnit implements IdolGroup {
     public void setMain(MainGroup main) {
         this.main = main;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see main.IdolGroup#addIdol(main.Idol)
      */
     @Override
@@ -60,7 +62,9 @@ public class SubUnit implements IdolGroup {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see main.IdolGroup#addSong(main.Song)
      */
     @Override
@@ -71,22 +75,44 @@ public class SubUnit implements IdolGroup {
         song.setGroup(this);
         songs.put(song.hashCode(), song);
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see main.IdolGroup#addSong(main.Song)
      */
     @Override
     public void addSong(String nameEN, String nameJP) {
         Song song = new Song(nameEN, nameJP);
-        if (main.getSongs().get(song.hashCode()) != null
-            && main.getSongs().get(song.hashCode()).equals(song)) {
+        Idol center = null;
+        if (main.getSongs().get(song.hashCode()) != null 
+                && main.getSongs().get(song.hashCode()).equals(song)) {
+            center = main.getSongs().get(song.hashCode()).getCenter();
             main.removeSong(song);
         }
         song.setGroup(this);
+        song.setCenter(center);
         songs.put(song.hashCode(), song);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see main.IdolGroup#getName()
+     */
+    @Override
+    public Song getSong(String name) {
+        for (Song song : songs.values()) {
+            if (song.getName().equalsIgnoreCase(name)) {
+                return song;
+            }
+        }
+        throw new IllegalArgumentException("No such song in this group...");
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see main.IdolGroup#getSongs()
      */
     @Override
@@ -94,7 +120,9 @@ public class SubUnit implements IdolGroup {
         return songs;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see main.IdolGroup#getName()
      */
     @Override
@@ -102,7 +130,9 @@ public class SubUnit implements IdolGroup {
         return name;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -111,9 +141,9 @@ public class SubUnit implements IdolGroup {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        
+
         SubUnit other = (SubUnit) obj;
-        
+
         if (name == null) {
             if (other.name != null)
                 return false;
@@ -122,14 +152,23 @@ public class SubUnit implements IdolGroup {
         return true;
     }
 
-    /* (non-Javadoc)
+    public String toStringFull() {
+        String result = "";
+        result += "Name: " + name;
+        result += "\nMembers: " + MainGroup.turnToString(idols);
+        result += "\nSongs: " + MainGroup.turnToString(songs);
+        result += "\nMain Group: " + main.getName();
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        String result = "";
-        result += name;
-        return result;
+        return name;
     }
 
 }

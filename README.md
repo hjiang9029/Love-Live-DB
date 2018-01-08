@@ -1,4 +1,4 @@
-# potential-octo-spork
+# Love Live! DB
 <p> A parser for Love Live! School Idol Project. This uses a .json that I've created myself off of the data pulled from the Love Live Wikia. </p>
 </br>
 <p> Nearly all of the µ's songs have centers, so songs will be grouped up with their respective center. Any solos, duets and trios are included in the

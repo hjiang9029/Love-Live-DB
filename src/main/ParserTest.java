@@ -34,9 +34,11 @@ public class ParserTest {
         Parser.Aqours.getIdols();
         assertEquals(113, Parser.Muse.getTotalSongs());
         assertEquals(59, Parser.Aqours.getTotalSongs());
-        System.out.println(Parser.Muse);
+        System.out.println(Parser.Muse.getSubUnits().get(0).toStringFull());
         System.out.println();
-        System.out.println(Parser.Muse.getIdols().get(0).toStringFull());
+        SubUnit test = new SubUnit("BiBi");
+        System.out.println(Parser.Muse.getSong("eien friends"));
+        System.out.println(Parser.Muse.getSubUnit(test).getSong("psychic fire"));
     }
     
     

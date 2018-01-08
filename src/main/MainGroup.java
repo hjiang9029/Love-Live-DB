@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Should create two static objects of this type at the beginning,
  * one for Muse, one for Aqours.
  * 
- * @version 2018-01-06
+ * @version 2018-01-07
  * @author Henry Jiang
  *
  */
@@ -201,6 +201,28 @@ public class MainGroup implements IdolGroup {
             }
         }
         return false;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see main.IdolGroup#getName()
+     */
+    @Override
+    public Song getSong(String name) {
+        for (Song song : songs.values()) {
+            if (song.getName().equalsIgnoreCase(name)) {
+                return song;
+            }
+        }
+        for (SubUnit sub : units) {
+            for (Song song : sub.getSongs().values()) {
+                if (song.getName().equalsIgnoreCase(name)) {
+                    return song;
+                }
+            }
+        }
+        throw new IllegalArgumentException("No such song in this group...");
     }
 
     /* (non-Javadoc)
